@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			var destination;
+			var savings = 0;
+		</script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+		<title>Rover: Budget Your Trip, One Step at a Time</title>
+		<!-- META DATA -->
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<!-- CSS Implementing Plugins -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bicolor.min.css') }}">
+		<!-- CSS Global Compulsory -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<!--<link rel="stylesheet" href="assets/css/custom.css">-->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+		<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+		<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon-72x72.png') }}">
+		<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon-114x114.png') }}">
+	</head>
+	<body>
+		<div id="awd-site-wrap" class="bg bg-home">
+			<div id="bg">
+				<div id="overlay">
+					<div class="awd-site-bg bg-home"></div>
+					<div class="awd-site-bg bg-subscribe"></div>
+					<div class="awd-site-bg bg-about"></div>
+					<div class="awd-site-bg bg-contact"></div>
+					<div class="awd-site-bg bg-services"></div>
+				</div>
+				<canvas id="awd-site-canvas"></canvas>
+			</div>
+			<!-- START SITE HEADER -->
+			<header id="awd-site-header">
+				<div id="awd-site-logo" class="animated" data-animation="fadeInDown" data-animation-delay="500">
+					<h1><a href="index.html#" class="go-slide" data-slide="home"><span><img src="/static/img/logo.png"></span></i><span>rover</span></a></h1>
+				</div>
+				<button class="menu-toggle animated" data-animation="fadeInDown" data-animation-delay="500" data-role="toggle">
+				<span></span>
+				<span></span>
+				<span></span>
+				</button>
+				<!-- START NAVIGATION -->
+				<nav id="awd-site-nav" class="navigation animated" data-animation="fadeInDown" data-animation-delay="500">
+					<div class="nav-container">
+						<!-- START NAVIGATION MENU ITEMS -->
+						<ul>
+							<li><a href="index.html#" data-slide="home" class="active">Home</a></li>
+							<li><a href="index.html#" data-slide="itinerary">Itinerary</a></li>
+						</ul>
+						<!-- END NAVIGATION MENU ITEMS -->
+					</div>
+				</nav>
+				<!-- END NAVIGATION -->
+			</header>
+			<!-- END SITE HEADER -->
+			<!-- START MAIN -->
+			<main id="awd-site-main">
+				<!-- START SECTION -->
+				<section id="awd-site-content">
+					<div class="sections-block">
+						<div class="slides">
+							<div class="slides-wrap">
+								<!-- HOME SECTION -->
+								<div class="slide-item" data-slide-id="home">
+									<!-- START CONTAINER -->
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-md-12">
+												<!-- START SLIDE CONTENT-->
+												<div class="slide-content">
+													<div class="row">
+														<div class="col-lg-6 col-md-6 svm">
+															<div class="section-info text-left">
+																<!-- START TITLE -->
+																<h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
+																	Budget
+																</h2>
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
+																	<strong>Step 1. </strong>We've analyzed your budget!
+																</p>
+																<div class="row">
+																	<div class="col-lg-12 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<center>
+                                        <canvas id="budgetChart" width="200" height="200"></canvas>
+																			</center>
+																	</div>
+																</div>
+																<br>
+																<form id="contact-form" class="contact-form">
+																	<div class="row">
+																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-right: -18px;">
+																		</div>
+																		<div class="col-lg-8 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="padding-top: 10px">
+                                      <strong>Expected Monthly Savings:</strong> $<span id="my_money">XXX.XX</span> x
+																		</div>
+																		<div class="col-lg-3 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-left: -25px;">
+																			<input type="text" name="contact-subject" id="months" placeholder="Months" class="contact-form-subject required">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-right: -18px;">
+																		</div>
+																		<div class="col-lg-5 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="contact-subject" id="percent" placeholder="% of Budget" class="contact-form-subject required">
+																		</div>
+																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="padding-top: 10px; margin-left: -15px; margin-right: -10px;">
+																			OR
+																		</div>
+																		<div class="col-lg-5 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="contact-subject" id="manual" placeholder="Fixed Budget" class="contact-form-subject required">
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div class="col-lg-5 col-lg-offset-1 col-md-6 svm">
+															<div class="section-info text-left">
+																<!-- START TITLE -->
+																<h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
+																	Destination
+																</h2>
+																<!-- END TITLE -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
+																	<strong>Step 2. </strong>Have a destination in mind? We'll plan the trip for you!
+																</p>
+																<form id="contact-form" class="contact-form">
+																	<div class="row">
+																		<div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="autocomplete" name="contact-subject" placeholder="City" class="contact-form-subject required">
+																		</div>
+																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="start-date" id="start-date" placeholder="Start" class="contact-form-subject required">
+																		</div>
+																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="end-date" id="end-date" placeholder="End" class="contact-form-subject required">
+																		</div>
+																	</div>
+																</form>
+																<center>
+																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="itinerary" onclick="planTrip()">Plan Trip <span><i class="fa fa-plane"></i></span></a>
+																</center>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- END SLIDE CONTENT-->
+											</div>
+										</div>
+									</div>
+									<!-- END CONTAINER -->
+								</div>
+								<!-- ITINERARY SECTION -->
+								<div class="slide-item" data-slide-id="itinerary">
+									<!-- START CONTAINER -->
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-md-12">
+												<!-- START SLIDE CONTENT-->
+												<div class="slide-content">
+													<div class="row">
+														<div class="col-lg-12 col-md-12 svm">
+															<div class="section-info text-left">
+																<!-- START TITLE -->
+																<h2 class="section-title text-default animated" data-animation="fadeIn" style="display: inline">Itinerary<a href="javascript: print()"><i class="fa fa-print" style="margin-left: 15px"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-save"></i></a></h2> 
+																<!-- END TITLE -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>Ready to go?</strong> Print or export your itinerary to Google Calendar. View your itinerary below!
+																</p>
+																<!-- START TABLE -->
+																<div id="table-wrapper">
+																	<div id="table-scroll">
+																		<table class="table-fill" width="100%" overflow="scroll">
+																			<thead>
+																				<tr>
+																					<th class="text-left">Date</th>
+																					<th class="text-left">Time</th>
+																					<th class="text-left">Event</th>
+																					<th class="text-left">Estimated Cost</th>
+																					<th class="text-left">Options</th>
+																				</tr>
+																			</thead>
+																			<tbody class="table-hover" id="rows">
+																				<tr>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Remove</a></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+																<!-- END TABLE -->
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- END SLIDE CONTENT-->
+											</div>
+										</div>
+										<!-- END ROW -->
+									</div>
+									<!-- END CONTAINER -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- END SECTION -->
+			</main>
+			<!-- END MAIN -->
+			<footer id="awd-site-footer">
+				<!-- START COPYRIGHT -->
+				<div class="copyright animated" data-animation="fadeInUp" data-animation-delay="500">
+				</div>
+				<!-- END COPYRIGHT -->
+			</footer>
+		</div>
+		<!-- JS -->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/vendor.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/options-v=2.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/main-v=1.js') }}"></script>
+	</body>
+</html>
