@@ -47,10 +47,6 @@ function main() {
 		console.log("NC Cost of 2000: " + convertWattToCost(wattNC, "north carolina"));
 
 		console.log("NC Cost of 2016: " + convertWattToCost(wattNC2016, "north carolina"));
-
-
-
-
 	});
 }
 main();
@@ -58,7 +54,7 @@ main();
 
 function convertSqFtToBTU(squarefootage) {
 	
-	return squarefootage * 20;
+	return squarefootage * 25;
 	/*if (zone == 1) {
 		return 32.5*squarefootage;
 	} else if (zone == 2) {
@@ -98,15 +94,15 @@ function convertSEERtoWatt(SEER, zone, squarefootage) {
 
 	// Watt = BTU / SEER
 	if(zone == 1) {
-		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (12*30))) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (299.43))) / SEER;
 	} else if (zone == 2) {
-		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (9*30))) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (265.73))) / SEER;
 	} else if (zone == 3) {
-		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (8*30))) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (247.89))) / SEER;
 	} else if (zone == 4) {
-		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (7 * 30))) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (195.38))) / SEER;
 	} else if (zone == 5) {
-		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (6* 30))) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (176.25))) / SEER;
 	}
 }
 
@@ -130,4 +126,14 @@ function convertWattToCost(watt, state) {
 	cost = (watt/1000) * (costConverter/100);
 
 	return cost;
+}
+
+function calcTotalCost(state, year, squarefootage) {
+	var watt = convertSEERtoWatt(convertYearToSEER(year), stateToZone(state), squarefootage);
+	var cost = convertWattToCost(watt, state);
+	return cost;
+}
+
+function calcYearBreakEven(cost, newUnitCost) {
+
 }
