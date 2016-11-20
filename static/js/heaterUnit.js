@@ -23,17 +23,13 @@ function convertBTUtoWatt(BTU) {
 	return BTU*0.000293071;
 }
 
-function convertYearToSEER(year) {
-	if (year <= 1980) {
-		return 4;
-	} else if (year <= 1985 && year > 1980) {
-		return 6.5;
-	} else if (year <= 1991 && year > 1985) {
-		return 7.5;
-	} else if (year <= 2005 && year > 1991) {
-		return 11;
-	} else if (year > 2005) {
-		return 15;
+function convertYearToEfficiency(year) {
+	if (year <= 2006) {
+		return 60;
+	} else if (year <= 2011 && year > 2006) {
+		return 78;
+	} else if (year <= 2016 && year > 2011) {
+		return 81.5;
 	}
 }
 

@@ -14,13 +14,15 @@ function main() {
 			climateTemps.push(parseFloat(temp2[3]));
 		}
 		
-		for(var i = 0; i<100; i+=10) {
+		console.log("Efficiency in 2009: " + convertYearToEfficiency(2009));
+		console.log("New York 2009: " + convertWattToCostHeater(heatToWatt(convertYearToEfficiency(2009), "new york", 3000), "new york"));
+		/*for(var i = 0; i<100; i+=10) {
 			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
 		}
 
 		for(var i = 90; i<99; i++) {
 			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
-		}
+		}*/
 	});
 }
 main();
