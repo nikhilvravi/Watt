@@ -125,7 +125,7 @@ function convertWattToCost(watt, state) {
 	
 	cost = (watt/1000) * (costConverter/100);
 
-	return cost;
+	return cost.toFixed(2);
 }
 
 function calcTotalCost(state, year, squarefootage) {
@@ -134,6 +134,21 @@ function calcTotalCost(state, year, squarefootage) {
 	return cost;
 }
 
-function calcYearBreakEven(cost, newUnitCost) {
+function costOfRepair(squarefootage) {
+	convertSqFtToBTU(squarefootage) * 0.01;
+}
 
+function calcBreakEvenRepair(state, year, newYear, squarefootage, priceOfNewModel) {
+	var oldModel = calcTotalCost(state, year, squarefootage);
+	var newModel = calcTotalCost(state, newYear, squarefootage);
+	var repairCost = costOfRepair(squarefootage);
+
+	return (priceOfNewModel - repairCost) / (newModel - oldModel);
+}
+
+function calcBreakEven(state, year, squarefootage, priceOfNewModel) {
+	var oldModel = calcTotalCost(state, year, squarefootage);
+	var newModel = calcTotalCost(state, newYear, squarefootage);
+
+	return (priceOfNewModel) / (newModel - oldModel);
 }
