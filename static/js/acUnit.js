@@ -134,6 +134,12 @@ function calcTotalCost(state, year, squarefootage) {
 	return cost;
 }
 
+function calcTotalCostSEER(state, SEER, squarefootage) {
+	var watt = convertSEERtoWatt(SEER, stateToZone(state), squarefootage);
+	var cost = convertWattToCost(watt, state);
+	return cost;
+}
+
 function costOfRepair(squarefootage) {
 	convertSqFtToBTU(squarefootage) * 0.01;
 }
