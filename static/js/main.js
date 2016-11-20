@@ -65,8 +65,12 @@ function helper() {
 
 	if(bestMatchPrices[0] != currTotalCost) {
 		acUnitStr = acUnitStr.replace("[should/should not]", "should");
-		var yearsReq = ((price[bestMatches[0]]-currCostPerYear)/((currTotalCost-bestMatchPrices[0])/remYears)).toFixed(2);
-		acUnitStr += "At best, you can break even (for cost) in " + yearsReq + " years.";
+		acUnitStr = acUnitStr.replace("buy", "<strong>buy</strong>");
+		var yearsReq = (price[bestMatches[0]]/(currCostPerYear - calcTotalCostSEER(state, seer[bestMatches[0]], sqFeet))).toFixed(2);
+		var carbonSaved = (calcTotalCarbonYear(state, acYear, sqFeet) - calcTotalCarbonSEER(state, seer[bestMatches[0]], sqFeet)).toFixed(0);
+		var carbonPercent = ((1 - calcTotalCarbonSEER(state, seer[bestMatches[0]], sqFeet)/calcTotalCarbonYear(state, acYear, sqFeet))*100).toFixed(0);
+		acUnitStr += "At best, you can break even (for cost) in <strong>" + yearsReq + " years</strong> and save <strong>" + carbonSaved + " pounds</strong> of carbon per year!";
+		acUnitStr += " You saved <strong>" + carbonPercent + "%</strong> in carbon emissions, which is great!"
 
 		document.getElementById('acUnitRows').innerHTML = "";
 		var newRows = "";
@@ -83,7 +87,7 @@ function helper() {
 		document.getElementById('acUnitRows').innerHTML += newRows;
 		acUnitStr += " Your top choices are:";
 	} else {
-		acUnitStr.replace("[should/should not]", "should not");
+		acUnitStr = acUnitStr.replace("[should/should not]", "should not");
 		acUnitStr += " You have no choices.";
 	}
 	document.getElementById('acUnitText').innerHTML = acUnitStr;

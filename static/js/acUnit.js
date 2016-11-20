@@ -55,7 +55,6 @@ function convertSEERtoWatt(SEER, zone, squarefootage) {
 	}
 }
 
-
 function stateToZone(state) {
 	for(i=0; i<states.length; i++) {
 		if(state === states[i]) {
@@ -108,4 +107,9 @@ function calcTotalCarbonSEER(state, SEER, squarefootage) {
 	var watt = convertSEERtoWatt(SEER, stateToZone(state), squarefootage);
 	var carbon = (watt/1000)*2;
 	return carbon;
+}
+
+function calcTotalCarbonYear(state, year, squarefootage) {
+	var SEER = convertYearToSEER(year);
+	return calcTotalCarbonSEER(state, SEER, squarefootage);
 }
