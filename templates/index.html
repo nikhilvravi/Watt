@@ -8,8 +8,7 @@
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
-		<script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
-		<title>Rover: Budget Your Trip, One Step at a Time</title>
+		<title>Watt: Save Money</title>
 		<!-- META DATA -->
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<meta charset="utf-8">
@@ -50,7 +49,7 @@
 			<!-- START SITE HEADER -->
 			<header id="awd-site-header">
 				<div id="awd-site-logo" class="animated" data-animation="fadeInDown" data-animation-delay="500">
-					<h1><a href="index.html#" class="go-slide" data-slide="home"><span><img src="/static/img/logo.png"></span></i><span>rover</span></a></h1>
+					<h1><a href="index.html#" class="go-slide" data-slide="home"><span><img src="/static/img/logo.png">
 				</div>
 				<button class="menu-toggle animated" data-animation="fadeInDown" data-animation-delay="500" data-role="toggle">
 				<span></span>
@@ -63,7 +62,7 @@
 						<!-- START NAVIGATION MENU ITEMS -->
 						<ul>
 							<li><a href="index.html#" data-slide="home" class="active">Home</a></li>
-							<li><a href="index.html#" data-slide="itinerary">Itinerary</a></li>
+							<li><a href="index.html#" data-slide="savings">Savings</a></li>
 						</ul>
 						<!-- END NAVIGATION MENU ITEMS -->
 					</div>
@@ -87,45 +86,32 @@
 												<!-- START SLIDE CONTENT-->
 												<div class="slide-content">
 													<div class="row">
-														<div class="col-lg-6 col-md-6 svm">
+														<div class="col-lg-5 col-md-6 svm">
 															<div class="section-info text-left">
 																<!-- START TITLE -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" onload="createText()">
+																	Meet <strong>Watt</strong>. Watt saves you money. Plug in some numbers—we'll crunch the data—and see how you can save.
+																</p>
+																<br>
 																<h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
-																	Budget
+																	Household
 																</h2>
 																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
-																	<strong>Step 1. </strong>We've analyzed your budget!
+																	<strong>Step 1. </strong>What does your household look like?
 																</p>
-																<div class="row">
-																	<div class="col-lg-12 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<center>
-                                        <canvas id="budgetChart" width="200" height="200"></canvas>
-																			</center>
-																	</div>
-																</div>
-																<br>
 																<form id="contact-form" class="contact-form">
 																	<div class="row">
-																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-right: -18px;">
+																		<div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="autocomplete" name="contact-subject" placeholder="City" class="contact-form-subject required">
 																		</div>
-																		<div class="col-lg-8 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="padding-top: 10px">
-                                      <strong>Expected Monthly Savings:</strong> $<span id="my_money">XXX.XX</span> x
+																		<div class="col-lg-4 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="household-size" id="household-size" placeholder="# of Ppl." class="contact-form-subject required">
 																		</div>
-																		<div class="col-lg-3 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-left: -25px;">
-																			<input type="text" name="contact-subject" id="months" placeholder="Months" class="contact-form-subject required">
+																		<div class="col-lg-4 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="years" id="years" placeholder="Years" class="contact-form-subject required">
 																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-right: -18px;">
-																		</div>
-																		<div class="col-lg-5 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="contact-subject" id="percent" placeholder="% of Budget" class="contact-form-subject required">
-																		</div>
-																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="padding-top: 10px; margin-left: -15px; margin-right: -10px;">
-																			OR
-																		</div>
-																		<div class="col-lg-5 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="contact-subject" id="manual" placeholder="Fixed Budget" class="contact-form-subject required">
+																		<div class="col-lg-4 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" name="sqft" id="sqft" placeholder="Sq. Ft." class="contact-form-subject required">
 																		</div>
 																	</div>
 																</form>
@@ -135,27 +121,42 @@
 															<div class="section-info text-left">
 																<!-- START TITLE -->
 																<h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
-																	Destination
+																	Appliances
 																</h2>
 																<!-- END TITLE -->
 																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
-																	<strong>Step 2. </strong>Have a destination in mind? We'll plan the trip for you!
+																	<strong>Step 2. </strong>What appliances do you own?
 																</p>
 																<form id="contact-form" class="contact-form">
 																	<div class="row">
-																		<div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" id="autocomplete" name="contact-subject" placeholder="City" class="contact-form-subject required">
+																		<div class="col-md-8 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="acUnit" name="acUnit" placeholder="AC Unit Manufacturer" class="contact-form-subject required">
 																		</div>
-																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="start-date" id="start-date" placeholder="Start" class="contact-form-subject required">
+																		<div class="col-md-4 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="acUnitYear" name="acUnitYear" placeholder="Year" class="contact-form-subject required">
 																		</div>
-																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="end-date" id="end-date" placeholder="End" class="contact-form-subject required">
+																		<div class="col-md-8 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="heatingUnit" name="heatingUnit" placeholder="Heating Unit Manufacturer" class="contact-form-subject required">
+																		</div>
+																		<div class="col-md-4 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="heatingUnitYear" name="heatingUnitYear" placeholder="Year" class="contact-form-subject required">
+																		</div>
+																		<div class="col-md-8 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="microwave" name="microwave" placeholder="Microwave Manufacturer" class="contact-form-subject required">
+																		</div>
+																		<div class="col-md-4 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="microwaveYear" name="microwaveYear" placeholder="Year" class="contact-form-subject required">
+																		</div>
+																		<div class="col-md-8 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="fridge-freezer" name="fridge-freezer" placeholder="Fridge/Freezer Manufact." class="contact-form-subject required">
+																		</div>
+																		<div class="col-md-4 animated" data-animation="fadeIn" data-animation-delay="200">
+																			<input type="text" id="fridge-freezerYear" name="fridge-freezerYear" placeholder="Year" class="contact-form-subject required">
 																		</div>
 																	</div>
 																</form>
 																<center>
-																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="itinerary" onclick="planTrip()">Plan Trip <span><i class="fa fa-plane"></i></span></a>
+																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="savings" onclick="planTrip()">Calculate Savings <span><i class="fa fa-calculator"></i></span></a>
 																</center>
 															</div>
 														</div>
@@ -167,8 +168,8 @@
 									</div>
 									<!-- END CONTAINER -->
 								</div>
-								<!-- ITINERARY SECTION -->
-								<div class="slide-item" data-slide-id="itinerary">
+								<!-- SAVINGS SECTION -->
+								<div class="slide-item" data-slide-id="savings">
 									<!-- START CONTAINER -->
 									<div class="container-fluid">
 										<div class="row">
@@ -179,36 +180,113 @@
 														<div class="col-lg-12 col-md-12 svm">
 															<div class="section-info text-left">
 																<!-- START TITLE -->
-																<h2 class="section-title text-default animated" data-animation="fadeIn" style="display: inline">Itinerary<a href="javascript: print()"><i class="fa fa-print" style="margin-left: 15px"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-save"></i></a></h2> 
+																<h2 class="section-title text-default animated" data-animation="fadeIn" style="display: inline">Savings<a href="javascript: print()"><i class="fa fa-print" style="margin-left: 15px"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-send"></i></a></h2> 
 																<!-- END TITLE -->
 																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
-																	<strong>Ready to go?</strong> Print or export your itinerary to Google Calendar. View your itinerary below!
+																	<strong>Ready to save?</strong> Print or email our recommendations. View them below!
 																</p>
-																<!-- START TABLE -->
-																<div id="table-wrapper">
-																	<div id="table-scroll">
-																		<table class="table-fill" width="100%" overflow="scroll">
-																			<thead>
-																				<tr>
-																					<th class="text-left">Date</th>
-																					<th class="text-left">Time</th>
-																					<th class="text-left">Event</th>
-																					<th class="text-left">Estimated Cost</th>
-																					<th class="text-left">Options</th>
-																				</tr>
-																			</thead>
-																			<tbody class="table-hover" id="rows">
-																				<tr>
-																					<td class="text-left">N/A</td>
-																					<td class="text-left">N/A</td>
-																					<td class="text-left">N/A</td>
-																					<td class="text-left">N/A</td>
-																					<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Remove</a></td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
+																<!-- TABLE #1 -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>AC Unit.</strong> Your [manufacturer] AC unit was made in [year] and costs approximately $[amount] per year in energy. According to our estimates, you [should/should not] buy a new AC unit. Your top choices are:
+																</p>
+																<table class="table-fill" width="100%" overflow="scroll">
+																	<thead>
+																		<tr>
+																			<th class="text-left">Model</th>
+																			<th class="text-left">Base Cost</th>
+																			<th class="text-left">Energy Consumption</th>
+																			<th class="text-left">Savings Per Year</th>
+																			<th class="text-left">Purchase?</th>
+																		</tr>
+																	</thead>
+																	<tbody class="table-hover" id="rows">
+																		<tr>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<br><br>
+																<!-- END TABLE -->
+																<!-- TABLE #2 -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>Heating Unit.</strong> Your [manufacturer] heating unit was made in [year] and costs approximately $[amount] per year in energy. According to our estimates, you [should/should not] buy a new heating unit. Your top choices are:
+																</p>
+																<table class="table-fill" width="100%" overflow="scroll">
+																	<thead>
+																		<tr>
+																			<th class="text-left">Model</th>
+																			<th class="text-left">Base Cost</th>
+																			<th class="text-left">Energy Consumption</th>
+																			<th class="text-left">Savings Per Year</th>
+																			<th class="text-left">Purchase?</th>
+																		</tr>
+																	</thead>
+																	<tbody class="table-hover" id="rows">
+																		<tr>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<br><br>
+																<!-- END TABLE -->
+																<!-- TABLE #3 -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>Microwave.</strong> Your [manufacturer] microwave was made in [year] and costs approximately $[amount] per year in energy. According to our estimates, you [should/should not] buy a new microwave. Your top choices are:
+																</p>
+																<table class="table-fill" width="100%" overflow="scroll">
+																	<thead>
+																		<tr>
+																			<th class="text-left">Model</th>
+																			<th class="text-left">Base Cost</th>
+																			<th class="text-left">Energy Consumption</th>
+																			<th class="text-left">Savings Per Year</th>
+																			<th class="text-left">Purchase?</th>
+																		</tr>
+																	</thead>
+																	<tbody class="table-hover" id="rows">
+																		<tr>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<br><br>
+																<!-- END TABLE -->
+																<!-- TABLE #4 -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>Fridge/Freezer.</strong> Your [manufacturer] fridge/freezer was made in [year] and costs approximately $[amount] per year in energy. According to our estimates, you [should/should not] buy a new fridge/freezer. Your top choices are:
+																</p>
+																<table class="table-fill" width="100%" overflow="scroll">
+																	<thead>
+																		<tr>
+																			<th class="text-left">Model</th>
+																			<th class="text-left">Base Cost</th>
+																			<th class="text-left">Energy Consumption</th>
+																			<th class="text-left">Savings Per Year</th>
+																			<th class="text-left">Purchase?</th>
+																		</tr>
+																	</thead>
+																	<tbody class="table-hover" id="rows">
+																		<tr>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left">N/A</td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																		</tr>
+																	</tbody>
+																</table>
 																<!-- END TABLE -->
 															</div>
 														</div>

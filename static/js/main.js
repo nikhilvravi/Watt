@@ -1,3 +1,4 @@
+/**
 var startDate, endDate, startString, endString, lastTime, leaveTime;
 var months = 6;
 var budget = 0;
@@ -234,3 +235,4 @@ function findFoodandEvents(longitude, latitude) {
     }
   });
 }
+**/

@@ -497,40 +497,6 @@
     });
   }
 
-  function getData(userId) {
-    $.get("/purchases/" + userId, function(data) {
-      var moneyFor = {};
-      var purchases = data.user_purchases;
-      for (var i = 0; i < purchases.length; i++) {
-        if (moneyFor[purchases[i].category]) {
-          moneyFor[purchases[i].category] += purchases[i].amount;
-        } else {
-          moneyFor[purchases[i].category] = purchases[i].amount;
-        }
-        savings -= purchases[i].amount;
-      }
-      var data = [];
-      for (var key in moneyFor) {
-        data.push({
-          "value": moneyFor[key],
-          "label": key,
-          "color": '#'+Math.floor(3000000 + Math.random()*10000000).toString(16),
-          "highlight": "#000"
-        });
-      }
-      var canvas = document.getElementById("budgetChart").getContext("2d");
-      new Chart(canvas).Pie(data);
-      $.get("/deposits/" + userId, function(data) {
-        var deposits = data.user_deposits;
-        for (var i = 0; i < deposits.length; i++) {
-          savings += deposits[i].amount;
-        }
-        savings /= 6;
-        $('#my_money').text(savings);
-      });
-    });
-  }
-
   ///** DOCUMENT READY **/
 
   $(document).on('ready', function () {
