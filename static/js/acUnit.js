@@ -13,16 +13,6 @@ function main() {
 			zones.push(parseInt(temp2[2]));
 			climateTemps.push(parseFloat(temp2[3]));
 		}
-		
-		console.log("Efficiency in 2009: " + convertYearToEfficiency(2009));
-		console.log("New York 2009: " + convertWattToCostHeater(heatToWatt(convertYearToEfficiency(2009), "new york", 3000), "new york"));
-		/*for(var i = 0; i<100; i+=10) {
-			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
-		}
-
-		for(var i = 90; i<99; i++) {
-			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
-		}*/
 	});
 }
 main();
@@ -95,17 +85,6 @@ function convertWattToCost(watt, state) {
 	return cost.toFixed(2);
 }
 
-/*function calcHeatLoss(state, insideTemp, squarefootage) {
-	var outsideTemp = stateToClimateTemp(state);
-	var thermalResistance = 19;
-	var heatLossRate;
-	var area;
-
-	area = Math.sqrt()
-
-	heatLossRate = ((area) * (outsideTemp - insideTemp)) / thermalResistance;
-}*/
-
 function calcTotalCost(state, year, squarefootage) {
 	var watt = convertSEERtoWatt(convertYearToSEER(year), stateToZone(state), squarefootage);
 	var cost = convertWattToCost(watt, state);
@@ -145,6 +124,3 @@ function calcTotalCarbonYear(state, year, squarefootage) {
 	var SEER = convertYearToSEER(year);
 	return calcTotalCarbonSEER(state, SEER, squarefootage);
 }
-
-// HEATER UNIT
-
