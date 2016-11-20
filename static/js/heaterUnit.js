@@ -13,14 +13,12 @@ function convertYearToEfficiency(year) {
 }
 
 function calcTotalCostHeater(state, year, squarefootage) {
-	convertWattToCostHeater(heatToWatt(convertYearToEfficiency(year), state, squarefootage), state);
+	return convertWattToCostHeater(heatToWatt(convertYearToEfficiency(year), state, squarefootage), state);
 }
 
 function calcTotalCostEfficiency(state, efficiency, squarefootage) {
-	convertWattToCostHeater(heatToWatt(efficiency, state, squarefootage), state);
+	return convertWattToCostHeater(heatToWatt(efficiency, state, squarefootage), state);
 }
-
-
 
 function heatToWatt(heatingEfficiency, state, squarefootage) {
 	var climateTemp = stateToClimateTemp(state);
