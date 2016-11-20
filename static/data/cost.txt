@@ -1,50 +1,50 @@
-alabama	9.27	1
-alaska	17.46	5
-arizona	10.18	2
-arkansas	7.9	1
-california	15.15	2
-colorado	10.06	5
-connecticut	17.05	4
-delaware	11.22	4
-florida	10.77	1
-georgia	10.03	1
-hawaii	33.43	1
-idaho	7.93	5
-illinois	9.36	4
-indiana	9.06	4
-iowa	8.15	4
-kansas	10.16	4
-kentucky	8.15	3
-louisiana	8.09	1
-maine	12.65	5
-maryland	12.1	3
-massachusetts	15.35	4
-michigan	11.03	5
-minnesota	9.52	5
-mississippi	9.6	5
-missouri	9.11	5
-montana	8.59	5
-nebraska	8.84	5
-nevada	9.73	4
-new hampshire	15.22	5
-new jersey	13.95	3
-new mexico	9.65	2
-new york	16.25	5
-north carolina	9.33	2
-north dakota	8.41	5
-ohio	9.73	4
-oklahoma	8.18	1
-oregon	8.68	4
-pennsylvania	10.28	4
-rhode island	15.41	3
-south carolina	9.67	2
-south dakota	9.05	5
-tennessee	9.4	2
-texas	8.94	1
-utah	8.35	3
-vermont	14.57	5
-virginia	9.17	3
-washington	7.13	5
-west virginia	7.65	2
-wisconsin	10.57	5
-wyoming	7.76	4
+alabama	9.27	12	65
+alaska	17.46	5	42
+arizona	10.18	2	62.2
+arkansas	7.9	1	58.5
+california	15.15	2	60.9
+colorado	10.06	5	48.6
+connecticut	17.05	4	52.5
+delaware	11.22	4	58.8
+florida	10.77	1	71.8
+georgia	10.03	1	65.3
+hawaii	33.43	1	75.2
+idaho	7.93	5	46.6
+illinois	9.36	4	55.6
+indiana	9.06	4	55
+iowa	8.15	4	51.8
+kansas	10.16	4	57.8
+kentucky	8.15	3	58
+louisiana	8.09	1	68.7
+maine	12.65	5	44.1
+maryland	12.1	3	56.9
+massachusetts	15.35	4	51.1
+michigan	11.03	5	48.2
+minnesota	9.52	5	45.3
+mississippi	9.6	5	65.5
+missouri	9.11	5	58.5
+montana	8.59	5	45.3
+nebraska	8.84	5	52.5
+nevada	9.73	4	52.4
+new hampshire	15.22	5	47.2
+new jersey	13.95	3	55.8
+new mexico	9.65	2	55.9
+new york	16.25	5	49
+north carolina	9.33	2	60.8
+north dakota	8.41	5	44
+ohio	9.73	4	54.1
+oklahoma	8.18	1	63
+oregon	8.68	4	49.4
+pennsylvania	10.28	4	51.8
+rhode island	15.41	3	53.4
+south carolina	9.67	2	64.4
+south dakota	9.05	5	49.2
+tennessee	9.4	2	60
+texas	8.94	1	67.5
+utah	8.35	3	51.6
+vermont	14.57	5	46.3
+virginia	9.17	3	57.5
+washington	7.13	5	48.8
+west virginia	7.65	2	54.1
+wisconsin	10.57	5	47.4
+wyoming	7.76	4	45.6

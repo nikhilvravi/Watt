@@ -1,6 +1,7 @@
 var states = [];
 var costs = [];
 var zones = [];
+var climateTemps = [];
 
 function main() {
 	$.get("../static/data/cost.txt", function(data) {
@@ -10,6 +11,15 @@ function main() {
 			states.push(temp2[0]);
 			costs.push(parseFloat(temp2[1]));
 			zones.push(parseInt(temp2[2]));
+			climateTemps.push(parseFloat(temp2[3]));
+		}
+		
+		for(var i = 0; i<100; i+=10) {
+			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
+		}
+
+		for(var i = 90; i<99; i++) {
+			console.log("New York " + i + "%: " + convertWattToCostHeater(heatToWatt(i, "new york", 3000), "new york"));
 		}
 	});
 }
@@ -34,6 +44,14 @@ function convertYearToSEER(year) {
 		return 11;
 	} else if (year > 2005) {
 		return 15;
+	}
+}
+
+function stateToClimateTemp(state) {
+	for(var i = 0; i<climateTemps.length; i++) {
+		if(state === states[i]) {
+			return climateTemps[i];
+		}
 	}
 }
 
@@ -65,6 +83,7 @@ function stateToZone(state) {
 }
 
 function convertWattToCost(watt, state) {
+	var costConverter;
 	for(i = 0; i<states.length; i++) {
 		if(state == states[i]) {
 			costConverter = costs[i];
@@ -73,6 +92,17 @@ function convertWattToCost(watt, state) {
 	cost = (watt/1000) * (costConverter/100);
 	return cost.toFixed(2);
 }
+
+/*function calcHeatLoss(state, insideTemp, squarefootage) {
+	var outsideTemp = stateToClimateTemp(state);
+	var thermalResistance = 19;
+	var heatLossRate;
+	var area;
+
+	area = Math.sqrt()
+
+	heatLossRate = ((area) * (outsideTemp - insideTemp)) / thermalResistance;
+}*/
 
 function calcTotalCost(state, year, squarefootage) {
 	var watt = convertSEERtoWatt(convertYearToSEER(year), stateToZone(state), squarefootage);
@@ -113,3 +143,6 @@ function calcTotalCarbonYear(state, year, squarefootage) {
 	var SEER = convertYearToSEER(year);
 	return calcTotalCarbonSEER(state, SEER, squarefootage);
 }
+
+// HEATER UNIT
+
