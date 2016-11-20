@@ -103,3 +103,9 @@ function calcBreakEven(state, year, squarefootage, priceOfNewModel) {
 	var newModel = calcTotalCost(state, newYear, squarefootage);
 	return (priceOfNewModel) / (newModel - oldModel);
 }
+
+function calcTotalCarbonSEER(state, SEER, squarefootage) {
+	var watt = convertSEERtoWatt(SEER, stateToZone(state), squarefootage);
+	var carbon = (watt/1000)*2;
+	return carbon;
+}
