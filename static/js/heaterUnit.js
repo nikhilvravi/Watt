@@ -57,3 +57,14 @@ function convertWattToCostHeater(watt, state) {
 	cost = (watt/1000) * (costConverter/100);
 	return cost.toFixed(2);
 }
+
+function calcTotalCarbonEfficiency(state, SEER, squarefootage) {
+	var watt = convertSEERtoWatt(SEER, stateToZone(state), squarefootage);
+	var carbon = (watt/1000)*2;
+	return carbon;
+}
+
+function calcTotalCarbonYearHeater(state, year, squarefootage) {
+	var efficiency = convertYearToEfficiency(year);
+	return calcTotalCarbonEfficiency(state, efficiency, squarefootage);
+}
