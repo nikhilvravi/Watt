@@ -13,15 +13,53 @@ function main() {
 		}
 
 		//test functions here
-		console.log(stateToZone("virginia"));
+
+		// Returns zone
+		console.log(convertSqFtToBTU(3000));
+
+		// Returns Watt
+		var wattNY = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("new york"), 3000);
+		//console.log(wattNY);
+
+		var wattTX = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("texas"), 3000);
+		//console.log(wattTX);
+
+		var wattNC = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("north carolina"), 3000);
+		//console.log(wattNY);
+
+		var wattNY2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("new york"), 3000);
+		//console.log(wattNY2016);
+
+		var wattTX2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("texas"), 3000);
+		//console.log(wattTX2016);
+
+		var wattNC2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("north carolina"), 3000);
+		// Returns 
+
+		console.log("New York Cost of 2000: " + convertWattToCost(wattNY,"new york"));
+
+		console.log("New York Cost of 2016: " + convertWattToCost(wattNY2016, "new york"));
+
+		console.log("Texas Cost of 2000: " + convertWattToCost(wattTX,"texas"));
+
+		console.log("Texas Cost of 2016: " + convertWattToCost(wattTX2016, "texas"));
+
+		console.log("NC Cost of 2000: " + convertWattToCost(wattNC, "north carolina"));
+
+		console.log("NC Cost of 2016: " + convertWattToCost(wattNC2016, "north carolina"));
+
+
+
+
 	});
 }
 main();
 
-/**
-function calculateBTUPerZone(zone, squarefootage) {
+
+function convertSqFtToBTU(squarefootage) {
 	
-	if (zone == 1) {
+	return squarefootage * 20;
+	/*if (zone == 1) {
 		return 32.5*squarefootage;
 	} else if (zone == 2) {
 		return 37.5*squarefootage;
@@ -31,7 +69,7 @@ function calculateBTUPerZone(zone, squarefootage) {
 		return 47.5*squarefootage;
 	} else if (zone = 5) {
 		return 55*squarefootage;
-	}
+	}*/
 
 }
 
@@ -56,22 +94,22 @@ function convertYearToSEER(year) {
 function convertSEERtoWatt(SEER, zone, squarefootage) {
 
 	// Estimated average hours for cooling
-	var hoursCooling = 8;
+	var hoursCooling = 20;
 
 	// Watt = BTU / SEER
 	if(zone == 1) {
-		return (calculateBTUPerZone(1, squarefootage)) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (12*30))) / SEER;
 	} else if (zone == 2) {
-		return (calculateBTUPerZone(2, squarefootage)) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (9*30))) / SEER;
 	} else if (zone == 3) {
-		return (calculateBTUPerZone(3, squarefootage)) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (8*30))) / SEER;
 	} else if (zone == 4) {
-		return (calculateBTUPerZone(4, squarefootage)) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (7 * 30))) / SEER;
 	} else if (zone == 5) {
-		return (calculateBTUPerZone(5, squarefootage)) / SEER;
+		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (6* 30))) / SEER;
 	}
 }
-**/
+
 
 function stateToZone(state) {
 	for(i=0; i<states.length; i++) {
@@ -82,4 +120,14 @@ function stateToZone(state) {
 	return("ERROR: state not found!");
 }
 
-//function convertWatttoCost() {}
+function convertWattToCost(watt, state) {
+	for(i = 0; i<states.length; i++) {
+		if(state == states[i]) {
+			costConverter = costs[i];
+		}
+	}
+	
+	cost = (watt/1000) * (costConverter/100);
+
+	return cost;
+}
