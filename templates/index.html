@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script>
-			var destination;
-			var savings = 0;
-		</script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/acUnit.js') }}"></script>
@@ -90,7 +86,7 @@
 														<div class="col-lg-5 col-md-6 svm">
 															<div class="section-info text-left">
 																<!-- START TITLE -->
-																<p class="animated" data-animation="fadeIn" data-animation-delay="100" onload="createText()">
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
 																	Meet <strong>Watt</strong>. Watt saves you money. Plug in some numbers—we'll crunch the data—and see how you can save.
 																</p>
 																<br>
@@ -157,7 +153,7 @@
 																	</div>
 																</form>
 																<center>
-																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="savings" onclick="planTrip()">Calculate Savings <span><i class="fa fa-calculator"></i></span></a>
+																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="savings" onclick="viewSavings()">Calculate Savings <span><i class="fa fa-calculator"></i></span></a>
 																</center>
 															</div>
 														</div>
@@ -206,7 +202,7 @@
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
-																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -232,7 +228,7 @@
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
-																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -258,7 +254,7 @@
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
-																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -284,7 +280,7 @@
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
 																			<td class="text-left">N/A</td>
-																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" onclick="removeRow(this)">Purchase</a></td>
+																			<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>
 																		</tr>
 																	</tbody>
 																</table>
