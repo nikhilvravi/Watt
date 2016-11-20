@@ -1,3 +1,23 @@
+var states = [];
+var costs = [];
+var zones = [];
+
+function main() {
+	$.get("../static/data/cost.txt", function(data) {
+		var temp = data.split('\n');
+		for(var i=0; i<temp.length; i++) {
+			var temp2 = temp[i].split('\t');
+			states.push(temp2[0]);
+			costs.push(parseFloat(temp2[1]));
+			zones.push(parseInt(temp2[2]));
+		}
+
+		//test functions here
+		console.log(stateToZone("virginia"));
+	});
+}
+main();
+
 /**
 function calculateBTUPerZone(zone, squarefootage) {
 	
@@ -54,31 +74,12 @@ function convertSEERtoWatt(SEER, zone, squarefootage) {
 **/
 
 function stateToZone(state) {
-	$.get("../static/data/state-energy-cost.txt", function(data) {
-		console.log(data);
-		var states = [];
-		var costs = [];
-		var zones = [];
-
-		var temp = data.split('\n');
-		console.log(temp);
-		for(var i=0; i<temp.length; i++) {
-			var temp2 = temp[i].split('\t');
-			states.push(temp2[0]);
-			costs.push(temp2[1]);
-			zones.push(temp2[2]);
+	for(i=0; i<states.length; i++) {
+		if(state === states[i]) {
+			return(zones[i]);
 		}
-
-		console.log(states);
-		console.log(costs);
-		console.log(zones);
-
-		for(i = 0; i<states.length; i++) {
-			if(state == states[i]) {
-				return zones[i];
-			}
-		}
-	});
+	}
+	return("ERROR: state not found!");
 }
 
 //function convertWatttoCost() {}
