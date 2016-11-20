@@ -11,46 +11,9 @@ function main() {
 			costs.push(parseFloat(temp2[1]));
 			zones.push(parseInt(temp2[2]));
 		}
-
-		//test functions here
-
-		// Returns zone
-		console.log(convertSqFtToBTU(3000));
-
-		// Returns Watt
-		var wattNY = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("new york"), 3000);
-		//console.log(wattNY);
-
-		var wattTX = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("texas"), 3000);
-		//console.log(wattTX);
-
-		var wattNC = convertSEERtoWatt(convertYearToSEER(2000), stateToZone("north carolina"), 3000);
-		//console.log(wattNY);
-
-		var wattNY2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("new york"), 3000);
-		//console.log(wattNY2016);
-
-		var wattTX2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("texas"), 3000);
-		//console.log(wattTX2016);
-
-		var wattNC2016 = convertSEERtoWatt(convertYearToSEER(2016), stateToZone("north carolina"), 3000);
-		// Returns 
-
-		console.log("New York Cost of 2000: " + convertWattToCost(wattNY,"new york"));
-
-		console.log("New York Cost of 2016: " + convertWattToCost(wattNY2016, "new york"));
-
-		console.log("Texas Cost of 2000: " + convertWattToCost(wattTX,"texas"));
-
-		console.log("Texas Cost of 2016: " + convertWattToCost(wattTX2016, "texas"));
-
-		console.log("NC Cost of 2000: " + convertWattToCost(wattNC, "north carolina"));
-
-		console.log("NC Cost of 2016: " + convertWattToCost(wattNC2016, "north carolina"));
 	});
 }
 main();
-
 
 function convertSqFtToBTU(squarefootage) {
 	
