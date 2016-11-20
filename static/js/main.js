@@ -115,13 +115,13 @@ function acHelper() {
         var newRows = "";
         for(i=0; i<3; i++) {
             if(bestMatches[i] === 0) break;
-            newRows += "<tr>";
+            newRows += '<tr>';
             newRows += '<td class="text-left">' + model[bestMatches[i]] + '</td>';
             newRows += '<td class="text-left">$' + price[bestMatches[i]] + '</td>';
             newRows += '<td class="text-left">' + ton[bestMatches[i]] + ' tons ($' + calcTotalCostSEER(state, seer[bestMatches[i]], sqFeet) + '/year) </td>';
             newRows += '<td class="text-left">$' + ((currTotalCost-bestMatchPrices[i])/remYears).toFixed(2) + '</td>';
-            newRows += '<td class="text-left"><a target="_blank" href="' + url[bestMatches[i]] + '" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
-            newRows += "</tr>";
+            newRows += '<td class="text-left"><a target="_blank" href="' + url[bestMatches[i]] + '" class="btn btn go-slide animated fadeIn visible" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
+            newRows += '</tr>';
         }
         document.getElementById('acUnitRows').innerHTML += newRows;
         console.log(document.getElementById('acUnitRows').innerHTML);
@@ -173,13 +173,13 @@ function heaterHelper() {
         var newRows = "";
         for(i=0; i<3; i++) {
             if(bestMatches[i] === 0) break;
-            newRows += "<tr>";
+            newRows += '<tr>';
             newRows += '<td class="text-left">' + modelHeater[bestMatches[i]] + '</td>';
             newRows += '<td class="text-left">$' + priceHeater[bestMatches[i]] + '</td>';
             newRows += '<td class="text-left">' + tonHeater[bestMatches[i]] + ' BTU ($' + calcTotalCostEfficiency(state, seerHeater[bestMatches[i]], sqFeet) + '/year) </td>';
             newRows += '<td class="text-left">$' + ((currTotalCost-bestMatchPrices[i])/remYears).toFixed(2) + '</td>';
-            newRows += '<td class="text-left"><a target="_blank" href="' + urlHeater[bestMatches[i]] + '" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
-            newRows += "</tr>";
+            newRows += '<td class="text-left"><a target="_blank" href="' + urlHeater[bestMatches[i]] + '" class="btn btn go-slide animated fadeIn visible" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
+            newRows += '</tr>';
         }
         document.getElementById('heaterUnitRows').innerHTML += newRows;
         heaterUnitStr += " Your top choices are:";
