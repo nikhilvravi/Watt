@@ -44,28 +44,47 @@ function helper() {
 	acUnitStr = acUnitStr.replace("[amount]", currCostPerYear);
 	var currTotalCost = currCostPerYear*remYears;
 
-	var bestMatch = 0;
-	var bestMatchPrice = currTotalCost;
+	var bestMatches = [0, 0, 0];
+	var bestMatchPrices = [currTotalCost, currTotalCost, currTotalCost];
 	for(var i=0; i<names.length; i++) {
-		var newCostPerYear = calcTotalCostSEER(state, seer[i], sqFeet);
-		var newTotalCost = price[i] + newCostPerYear*remYears;
-		if(newTotalCost < bestMatchPrice) {
-			bestMatch = i;
-			bestMatchPrice = newTotalCost;
+		if(ton[i]*600 >= sqFeet) {
+			var newCostPerYear = calcTotalCostSEER(state, seer[i], sqFeet);
+			var newTotalCost = price[i] + newCostPerYear*remYears;
+			if(newTotalCost < bestMatchPrices[0]) {
+				bestMatches[0] = i;
+				bestMatchPrices[0] = newTotalCost;
+			} else if(newTotalCost < bestMatchPrices[1]) {
+				bestMatches[1] = i;
+				bestMatchPrices[1] = newTotalCost;
+			} else if(newTotalCost < bestMatchPrices[2]) {
+				bestMatches[2] = i;
+				bestMatchPrices[2] = newTotalCost;
+			}
 		}
 	}
 
-	if(bestMatchPrice != currTotalCost) acUnitStr = acUnitStr.replace("[should/should not]", "should");
-	else acUnitStr.replace("[should/should not]", "should not");
-	document.getElementById('acUnitText').innerHTML = acUnitStr;
+	if(bestMatchPrices[0] != currTotalCost) {
+		acUnitStr = acUnitStr.replace("[should/should not]", "should");
+		var yearsReq = ((price[bestMatches[0]]-currCostPerYear)/((currTotalCost-bestMatchPrices[0])/remYears)).toFixed(2);
+		acUnitStr += "At best, you can break even (for cost) in " + yearsReq + " years.";
 
-	document.getElementById('acUnitRows').innerHTML = "";
-	var newRow = "<tr>";
-	newRow += '<td class="text-left">' + model[bestMatch] + '</td>';
-	newRow += '<td class="text-left">$' + price[bestMatch] + '</td>';
-	newRow += '<td class="text-left">' + ton[bestMatch] + ' tons ($' + calcTotalCostSEER(state, seer[bestMatch], sqFeet) + '/year) </td>';
-	newRow += '<td class="text-left">$' + ((currTotalCost-bestMatchPrice)/remYears).toFixed(2) + '</td>';
-	newRow += '<td class="text-left"><a target="_blank" href="' + url[bestMatch] + '" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
-	newRow += "</tr>";
-	document.getElementById('acUnitRows').innerHTML += newRow;
+		document.getElementById('acUnitRows').innerHTML = "";
+		var newRows = "";
+		for(i=0; i<3; i++) {
+			if(bestMatches[i] === 0) break;
+			newRows += "<tr>";
+			newRows += '<td class="text-left">' + model[bestMatches[i]] + '</td>';
+			newRows += '<td class="text-left">$' + price[bestMatches[i]] + '</td>';
+			newRows += '<td class="text-left">' + ton[bestMatches[i]] + ' tons ($' + calcTotalCostSEER(state, seer[bestMatches[i]], sqFeet) + '/year) </td>';
+			newRows += '<td class="text-left">$' + ((currTotalCost-bestMatchPrices[i])/remYears).toFixed(2) + '</td>';
+			newRows += '<td class="text-left"><a target="_blank" href="' + url[bestMatches[i]] + '" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60">Purchase</a></td>';
+			newRows += "</tr>";
+		}
+		document.getElementById('acUnitRows').innerHTML += newRows;
+		acUnitStr += " Your top choices are:";
+	} else {
+		acUnitStr.replace("[should/should not]", "should not");
+		acUnitStr += " You have no choices.";
+	}
+	document.getElementById('acUnitText').innerHTML = acUnitStr;
 }

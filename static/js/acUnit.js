@@ -16,20 +16,7 @@ function main() {
 main();
 
 function convertSqFtToBTU(squarefootage) {
-	
 	return squarefootage * 25;
-	/*if (zone == 1) {
-		return 32.5*squarefootage;
-	} else if (zone == 2) {
-		return 37.5*squarefootage;
-	} else if (zone == 3) {
-		return 42.5*squarefootage;
-	} else if (zone = 4) {
-		return 47.5*squarefootage;
-	} else if (zone = 5) {
-		return 55*squarefootage;
-	}*/
-
 }
 
 function convertBTUtoWatt(BTU) {
@@ -51,11 +38,10 @@ function convertYearToSEER(year) {
 }
 
 function convertSEERtoWatt(SEER, zone, squarefootage) {
-
-	// Estimated average hours for cooling
+	//Estimated average hours for cooling
 	var hoursCooling = 20;
 
-	// Watt = BTU / SEER
+	//Watt = BTU/SEER
 	if(zone == 1) {
 		return ((convertSqFtToBTU(squarefootage) * hoursCooling * (299.43))) / SEER;
 	} else if (zone == 2) {
@@ -85,9 +71,7 @@ function convertWattToCost(watt, state) {
 			costConverter = costs[i];
 		}
 	}
-	
 	cost = (watt/1000) * (costConverter/100);
-
 	return cost.toFixed(2);
 }
 
@@ -111,13 +95,11 @@ function calcBreakEvenRepair(state, year, newYear, squarefootage, priceOfNewMode
 	var oldModel = calcTotalCost(state, year, squarefootage);
 	var newModel = calcTotalCost(state, newYear, squarefootage);
 	var repairCost = costOfRepair(squarefootage);
-
 	return (priceOfNewModel - repairCost) / (newModel - oldModel);
 }
 
 function calcBreakEven(state, year, squarefootage, priceOfNewModel) {
 	var oldModel = calcTotalCost(state, year, squarefootage);
 	var newModel = calcTotalCost(state, newYear, squarefootage);
-
 	return (priceOfNewModel) / (newModel - oldModel);
 }
