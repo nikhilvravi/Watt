@@ -4,6 +4,8 @@ var zones = [];
 var climateTemps = [];
 
 function main() {
+	
+	// Reading the database for state name, cost, zones, and climate temperatures
 	$.get("../static/data/cost.txt", function(data) {
 		var temp = data.split('\n');
 		for(var i=0; i<temp.length; i++) {
@@ -17,6 +19,7 @@ function main() {
 }
 main();
 
+// Converts the squarefootage of the house to BTU
 function convertSqFtToBTU(squarefootage) {
 	return squarefootage * 25;
 }
