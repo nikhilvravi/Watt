@@ -8,5 +8,7 @@ Developed by Shrey Gupta, Nikhil Ravi, Mihir Paithane, Trishul Nagenalli, and Pr
 
 ####Awards & In the news
 HackDuke Winner: This project was awarded 1st place in energy and environment among 70+ submissions!
+
 Mentioned in Duke Today on November 22, 2016: https://today.duke.edu/2016/11/hackduke-successfully-codes-social-good.
+
 Mentioned in Duke Today on December 16, 2016: https://today.duke.edu/2016/12/hackduke-winners-continue-work-social-good-projects.
